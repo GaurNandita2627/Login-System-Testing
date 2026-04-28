@@ -6,34 +6,34 @@ from datetime import datetime
 FILE = "users.json"
 LOG_FILE = "login_history.txt"
 
-# ---------- PASSWORD HASH ----------
+# --PASSWORD HASH --
 def hash_password(password):
     return hashlib.sha256(password.encode()).hexdigest()
 
-# ---------- LOAD USERS ----------
+# -- LOAD USERS --
 def load_users():
     if os.path.exists(FILE):
         with open(FILE, "r") as f:
             return json.load(f)
     return {}
 
-# ---------- SAVE USERS ----------
+# -- SAVE USERS ----
 def save_users(users):
     with open(FILE, "w") as f:
         json.dump(users, f)
 
-# ---------- LOG LOGIN ----------
+# -- LOG LOGIN --
 def log_login(username):
     with open(LOG_FILE, "a") as f:
         f.write(f"{username} logged in at {datetime.now()}\n")
 
-# ---------- REGISTER ----------
+# --- REGISTER ---
 def register(users):
     print("\n--- REGISTER ---")
     username = input("Enter username: ")
 
     if username in users:
-        print("User already exists ❌")
+        print("User already exists ")
         return
 
     password = input("Enter password: ")
@@ -45,7 +45,7 @@ def register(users):
     }
 
     save_users(users)
-    print("Account created successfully ✅")
+    print("Account created successfully ")
 
 # ---------- LOGIN ----------
 def login(users):
@@ -53,7 +53,7 @@ def login(users):
     username = input("Enter username: ")
 
     if username not in users:
-        print("User not found ❌")
+        print("User not found ")
         return
 
     attempts = 3
@@ -62,7 +62,7 @@ def login(users):
         password = input("Enter password: ")
 
         if hash_password(password) == users[username]["password"]:
-            print("\nLogin Successful ✅")
+            print("\nLogin Successful ")
             print("Welcome", username)
 
             log_login(username)
@@ -90,11 +90,11 @@ def dashboard(username, users):
             print("Email:", users[username]["email"])
 
         elif choice == "2":
-            print("Logged out 👋")
+            print("Logged out 🌌")
             break
 
         else:
-            print("Invalid option ❌")
+            print("❌Invalid option ❌")
 
 # ---------- MAIN ----------
 def main():
@@ -115,7 +115,7 @@ def main():
             register(users)
 
         elif choice == "3":
-            print("Goodbye 👋")
+            print("Good night👋")
             break
 
         else:
